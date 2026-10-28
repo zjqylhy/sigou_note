@@ -49,4 +49,4 @@ python3 /opt/sigou-notes/releases/20261028-4f39545/deploy_site.py rollback --rel
 
 ## 备案状态
 
-原草稿的网站访问地址与分类已调整并进入负责人核对步骤。安全负责人和应急联络人需要用户重新进行身份认证；正式重新提交尚未执行，详细变更见[备案信息准备](filing-preparation.md)。
+原草稿的网站访问地址与分类已调整并进入负责人核对步骤。应急联络人认证成功，安全负责人认证仍待完成；正式重新提交尚未执行，详细变更见[备案信息准备](filing-preparation.md)。
