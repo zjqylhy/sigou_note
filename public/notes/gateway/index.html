@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="从请求、调用尝试和用量来源出发，记录 Go 大模型网关的计量设计与恢复边界。"><meta name="theme-color" content="#f8f7f2">
+  <title>一次模型调用，如何留下完整的账？ · 思构手记</title>
+  <link rel="canonical" href="https://linhengyi.xyz/notes/gateway/"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <header class="site-header"><div class="wrap header-inner"><a class="brand" href="/" aria-label="思构手记首页"><span class="brand-mark" aria-hidden="true">思</span><span><span class="brand-name">思构手记</span><span class="brand-en">THOUGHT INTO STRUCTURE</span></span></a><nav class="nav" aria-label="主导航"><a class="active" href="/#notes">技术手记</a><a href="/#projects">项目实践</a><a href="/#about">关于本站</a></nav></div></header>
+  <div class="wrap article-shell">
+    <aside class="article-side"><a class="back" href="/#notes"><span aria-hidden="true">←</span> 返回技术手记</a><nav aria-label="文章目录"><span class="kicker">本文目录</span><a href="#request">请求与调用尝试</a><a href="#usage">用量的来源</a><a href="#ledger">账本与恢复</a><a href="#tradeoffs">工程取舍</a></nav></aside>
+    <main id="main">
+      <header class="article-header"><span class="section-label">FIELD NOTE 01 / GO · 大模型网关</span><h1>一次模型调用，<br>如何留下完整的账？</h1><p class="article-intro">把多个模型接到同一个入口之后，另一个问题随之出现：一次请求的状态、用量和费用，应该怎样对应起来？</p><div class="article-meta"><time datetime="2026-10-28">2026.10.28</time><span>项目实践 · 大模型网关</span></div></header>
+      <article class="article-content">
+        <h2 id="request">先分清请求与调用尝试</h2>
+        <p>一个客户端请求，可能经历主模型调用、失败重试或备用模型调用。如果只保存一个最终成功状态，中间发生过的调用和费用就很容易丢失。</p>
+        <p>在网关实践中，使用 <code>request_id</code> 标识客户端请求，使用 <code>attempt_id</code> 标识每一次调用尝试。前者串起一次访问，后者记录实际发往模型的操作。两者分开后，最终结果和中间尝试都能保留各自的上下文。</p>
+        <div class="flow" role="img" aria-label="请求受理，建立调用尝试，收集用量，记录账本"><span>请求受理</span><b aria-hidden="true">→</b><span>调用尝试</span><b aria-hidden="true">→</b><span>收集用量</span><b aria-hidden="true">→</b><span>账本记录</span></div>
+        <h2 id="usage">费用需要有可以说明的来源</h2>
+        <p>模型响应中的 usage 是厂商提供的用量信息。网关记录用量时，同时保留模型身份、价格版本和用量来源，使后续的核对有明确依据。金额采用整数微单位保存，减少浮点数累计带来的偏差。</p>
+        <p>超时和网络断开只说明客户端没有拿到完整结果，不能据此判断厂商是否处理了请求。用量缺失时，应将估算与已确认记录区分开，并保留待核实状态。</p>
+        <div class="callout"><strong>未知用量需要保留为未知。</strong><br>把超时调用写成零费用，会让表面上完整的报表失去可信的依据。</div>
+        <h2 id="ledger">恢复能力从持久化边界开始</h2>
+        <p>账本的作用是保留可以追溯的事实。项目将调用开始记录写入持久化存储，再通过完成事件更新结算状态。后台处理事件时，需要识别已经处理过的记录，避免消息重复投递造成重复记账。</p>
+        <p>这里的幂等，指的是同一操作执行多次，最终只产生一次有效的业务结果。实现它需要稳定的标识和明确的状态推进规则，而不是仅依赖消息“通常只到达一次”。</p>
+        <p>数据库和消息队列可以帮助恢复已经写下的事实。对于从未收到的厂商用量，仍需要其他核对渠道；重放事件无法凭空补出不存在的信息。</p>
+        <h2 id="tradeoffs">边界明确，才能讨论取舍</h2>
+        <p>路由、重试、流式输出和计量之间存在联动。流式输出已经开始后，直接切换模型继续拼接，可能让一个回答混入两次不同推理的内容，也会让请求归属和费用解释更加困难。</p>
+        <p>在这类系统中，我更关注三件事：每一步是否留下了足够的信息；失败后哪些状态可以恢复；仍然未知的部分是否被如实展示。吞吐与容量则需要独立的负载验证，不能从功能演示推导。</p>
+      </article>
+      <nav class="article-end" aria-label="继续阅读"><a href="/#projects">← 查看项目实践</a><a href="/notes/retrieval/">下一篇：给答案一条可追溯的来路 →</a></nav>
+    </main>
+  </div>
+  <footer class="site-footer"><div class="wrap footer-inner"><div><span class="footer-brand">思构手记</span><span>　记录思考，构建系统。</span></div><div class="footer-meta"><span>© 2026 思构手记</span><a href="https://beian.miit.gov.cn/" rel="noopener noreferrer" target="_blank">粤ICP备2026161349号-1</a></div></div></footer>
+</body>
+</html>

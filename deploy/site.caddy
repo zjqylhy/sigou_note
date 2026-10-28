@@ -1,0 +1,19 @@
+# 只提供本项目的公开文件；仓库和运维文件留在挂载目录之外。
+linhengyi.xyz {
+    root * /srv/sigou-notes/public
+    encode zstd gzip
+    header {
+        X-Content-Type-Options nosniff
+        Referrer-Policy strict-origin-when-cross-origin
+        Content-Security-Policy "default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'"
+    }
+    file_server
+    handle_errors {
+        rewrite * /404.html
+        file_server
+    }
+}
+
+www.linhengyi.xyz {
+    redir https://linhengyi.xyz{uri} permanent
+}

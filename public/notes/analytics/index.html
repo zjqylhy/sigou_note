@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="从推送效果与设备分析实践出发，说明工具调用、只读数据、时间窗口和指标口径的约束。"><meta name="theme-color" content="#f8f7f2">
+  <title>让数据问题落在明确的边界里 · 思构手记</title>
+  <link rel="canonical" href="https://linhengyi.xyz/notes/analytics/"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <header class="site-header"><div class="wrap header-inner"><a class="brand" href="/" aria-label="思构手记首页"><span class="brand-mark" aria-hidden="true">思</span><span><span class="brand-name">思构手记</span><span class="brand-en">THOUGHT INTO STRUCTURE</span></span></a><nav class="nav" aria-label="主导航"><a class="active" href="/#notes">技术手记</a><a href="/#projects">项目实践</a><a href="/#about">关于本站</a></nav></div></header>
+  <div class="wrap article-shell">
+    <aside class="article-side"><a class="back" href="/#notes"><span aria-hidden="true">←</span> 返回技术手记</a><nav aria-label="文章目录"><span class="kicker">本文目录</span><a href="#contract">先明确分析约定</a><a href="#tools">给模型有限的工具</a><a href="#metrics">口径决定解释</a><a href="#evidence">保留验证的依据</a></nav></aside>
+    <main id="main">
+      <header class="article-header"><span class="section-label">FIELD NOTE 03 / 数据分析 · 工具调用</span><h1>让数据问题<br>落在明确的边界里</h1><p class="article-intro">一句“看看推送效果”，并没有说明查询的对象、时间与指标。能否把这些边界写清楚，直接影响分析结果的含义。</p><div class="article-meta"><time datetime="2026-10-28">2026.10.28</time><span>项目实践 · 受控数据分析</span></div></header>
+      <article class="article-content">
+        <h2 id="contract">先明确分析约定，再开始取数</h2>
+        <p>在推送效果与设备分析项目中，问题会被整理为包含对象、时间范围、指标和数据版本的分析约定。关键条件缺失时先补充，后续动作围绕这份约定执行。</p>
+        <p>发送期间、回执观察时长、设备状态时点分别具有不同含义。例如，查询某段时间发送的消息，需要另行说明给这些消息留出多长的回执观察时间，才能解释“尚未确认到达”的数量。</p>
+        <div class="flow" role="img" aria-label="明确问题和范围，验证工具参数，只读查询数据，核对结果证据"><span>问题与范围</span><b aria-hidden="true">→</b><span>参数校验</span><b aria-hidden="true">→</b><span>只读查询</span><b aria-hidden="true">→</b><span>结果与证据</span></div>
+        <h2 id="tools">模型提出动作，程序负责约束</h2>
+        <p>项目让模型从已注册的工具中选择动作。程序检查参数、依赖关系、授权数据源和执行预算，再通过只读视图取得数据。只读视图是数据库提供的受限查询入口，用于控制可见字段和记录范围。</p>
+        <p>这使执行范围可以由代码核对：查询用了哪些条件、消耗了多少次工具调用、依据哪个数据版本。开放分析扩大范围时，也应先明确具体变更并等待确认。</p>
+        <div class="callout">清晰的执行边界，需要落实在参数、权限、数据库访问和预算里，而不只是写在提示词中。</div>
+        <h2 id="metrics">指标名称之外，还要看分母与未知值</h2>
+        <p>“到达率”和“点击率”看似简单，但如果不知道分母是什么，很容易把不同指标放在一起比较。项目将点击/发送与点击/到达区分，并保留缺少到达回执的点击记录。</p>
+        <table class="article-table"><thead><tr><th scope="col">容易混淆的情况</th><th scope="col">需要保留的区别</th></tr></thead><tbody><tr><td>缺少到达回执</td><td>未知到达与已知失败分别记录。</td></tr><tr><td>汇总多个分组的比率</td><td>按汇总后的分子和分母重算。</td></tr><tr><td>分母为零</td><td>标记无样本，避免解释为业务上的零表现。</td></tr><tr><td>设备存量</td><td>按指定时点查询，明确跨应用的去重规则。</td></tr></tbody></table>
+        <h2 id="evidence">结果应当可以沿着过程复核</h2>
+        <p>演示数据由固定规则生成，明确标注为模拟数据。它适合检查查询口径、边界情况和流程行为；关于真实业务效果的判断，则需要相应的实际数据与验证。</p>
+        <p>在报告中保留数据版本、时间范围、已执行的动作和证据，有助于判断一个任务为何结束。即使最终回答读起来很完整，也应回到这些记录，确认它是否完成了最初约定的问题。</p>
+      </article>
+      <nav class="article-end" aria-label="继续阅读"><a href="/notes/retrieval/">← 上一篇：可追溯的知识问答</a><a href="/#notes">返回全部技术手记 →</a></nav>
+    </main>
+  </div>
+  <footer class="site-footer"><div class="wrap footer-inner"><div><span class="footer-brand">思构手记</span><span>　记录思考，构建系统。</span></div><div class="footer-meta"><span>© 2026 思构手记</span><a href="https://beian.miit.gov.cn/" rel="noopener noreferrer" target="_blank">粤ICP备2026161349号-1</a></div></div></footer>
+</body>
+</html>

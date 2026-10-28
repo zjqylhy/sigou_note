@@ -2,10 +2,33 @@
 
 个人技术主页独立项目，正式域名为 `https://linhengyi.xyz/`。
 
-当前阶段：需求已确认，技术方案待人工确认。尚未编写页面代码、修改 DNS、部署网站或修改备案表单。
+当前阶段：需求与技术方案已确认，网站实现与验证进行中。
 
 - [需求规格](docs/requirements.md)
 - [技术方案](docs/technical-plan.md)
 - [访问问题排查记录](docs/diagnosis-20261028.md)
+- [公开内容依据](docs/content-sources.md)
+
+## 本地查看
+
+页面位于 `public/`，由 HTML、CSS 和 SVG 组成，无需安装依赖或构建。
+
+```powershell
+python -m http.server 4173 --bind 127.0.0.1 --directory public
+```
+
+打开 `http://127.0.0.1:4173/`。预览服务器只用于本地查看；正式部署只发布 `public/`。
+
+## 部署接入
+
+部署目标：现有阿里云服务器的 Caddy 入口。接入文件位于 `deploy/`；在服务器最新配置核验、备份和配置校验通过后使用。
+
+- `/opt/sigou-notes/site/public`：当前版本的公开文件。
+- `/opt/sigou-notes/deploy/site.caddy`：独立站点配置。
+- `compose.sigou-notes.yaml`：给现有 `edge` 追加只读目录挂载。
+- 现有 Caddy 主配置需追加 `import /etc/caddy/sigou-notes.caddy`，日常 Compose 管理命令需保留本项目覆盖文件。
+- 主域名 A 记录指向实际服务器；www 的 CNAME 指向主域名。
+
+实际变更与验证结果记录在交付文档中；网站上线后再准备公安备案重新提交。
 
 用户于 2026-10-28 确认：上线与“思构手记”一致的个人技术主页，展示网站介绍和真实项目说明；补齐备案访问地址、核对 IP 和网站分类，重新提交前人工确认。随后明确要求新建独立项目。

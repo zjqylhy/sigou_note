@@ -1,0 +1,6 @@
+# 作为现有网关 Compose 命令的最后一份覆盖配置，挂载独立站点。
+services:
+  edge:
+    volumes:
+      - /opt/sigou-notes/site:/srv/sigou-notes:ro
+      - /opt/sigou-notes/deploy/site.caddy:/etc/caddy/sigou-notes.caddy:ro

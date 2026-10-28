@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="记录知识库问答中的文档入库、检索、引用和权限边界，以及如何理解验证结果。"><meta name="theme-color" content="#f8f7f2">
+  <title>给答案一条可追溯的来路 · 思构手记</title>
+  <link rel="canonical" href="https://linhengyi.xyz/notes/retrieval/"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <header class="site-header"><div class="wrap header-inner"><a class="brand" href="/" aria-label="思构手记首页"><span class="brand-mark" aria-hidden="true">思</span><span><span class="brand-name">思构手记</span><span class="brand-en">THOUGHT INTO STRUCTURE</span></span></a><nav class="nav" aria-label="主导航"><a class="active" href="/#notes">技术手记</a><a href="/#projects">项目实践</a><a href="/#about">关于本站</a></nav></div></header>
+  <div class="wrap article-shell">
+    <aside class="article-side"><a class="back" href="/#notes"><span aria-hidden="true">←</span> 返回技术手记</a><nav aria-label="文章目录"><span class="kicker">本文目录</span><a href="#evidence">从文档到证据</a><a href="#access">权限也是流程的一部分</a><a href="#scope">缺条件时先澄清</a><a href="#evaluation">分开理解验证结果</a></nav></aside>
+    <main id="main">
+      <header class="article-header"><span class="section-label">FIELD NOTE 02 / 知识库 · 检索与引用</span><h1>给答案一条<br>可追溯的来路</h1><p class="article-intro">知识库问答的价值，既在于找到相关内容，也在于让读者能够回到原文，判断结论是否成立。</p><div class="article-meta"><time datetime="2026-10-28">2026.10.28</time><span>项目实践 · 知识库问答</span></div></header>
+      <article class="article-content">
+        <h2 id="evidence">文档先变得可查，答案才有依据</h2>
+        <p>检索增强生成，通常简称 RAG，指先从知识库找出与问题有关的内容，再让模型结合这些内容组织回答。项目中的知识问答应用，围绕文档入库、版本管理、检索与引用下载建立完整流程。</p>
+        <p>入库时将文档整理为适合检索的片段，同时保留来源关系。检索得到的段落需要带着上下文进入回答，引用则应能指向对应版本的原文。只有一句孤立的相似文本，往往不足以支撑带条件的操作建议。</p>
+        <div class="flow" role="img" aria-label="文档与版本进入权限过滤后的检索，再组织带有原文引用的回答"><span>文档与版本</span><b aria-hidden="true">→</b><span>有权限的检索</span><b aria-hidden="true">→</b><span>证据组织</span><b aria-hidden="true">→</b><span>回答与引用</span></div>
+        <h2 id="access">权限需要跟着证据走</h2>
+        <p>“能搜到”与“可以阅读”是两件事。项目通过用户组和文档权限约束可见范围，引用原文的下载同样经过授权。页面上的业务适用范围，也不能直接当作阅读权限使用。</p>
+        <p>当权限变化影响正在执行的问答时，需要重新判断该任务是否仍有访问依据。只在最初打开页面时检查一次，并不能覆盖后续撤权的情况。</p>
+        <div class="callout">引用是一条回到证据的路径。这条路径本身也需要遵守文档权限与版本边界。</div>
+        <h2 id="scope">问题缺少条件时，先补齐问题</h2>
+        <p>以推送技术知识库为例，“到达率为什么下降”可能涉及应用、平台、通道、时间和具体异常现象。条件不同，适用的排查文档也可能不同。</p>
+        <p>此时先澄清关键条件，有助于确定证据范围。即使检索到了很多相关词，也不意味着已经找到了足以回答当前问题的材料。证据不足时，回答应保留缺口，而不是靠常识补成确定结论。</p>
+        <h2 id="evaluation">把验证结果放回它自己的范围</h2>
+        <p>项目使用原创模拟手册和对公开资料的简短整理作为技术语料。功能验收样例、模拟模型测试与问答效果评测，分别回答不同的问题。</p>
+        <table class="article-table"><thead><tr><th scope="col">验证方式</th><th scope="col">主要检查什么</th></tr></thead><tbody><tr><td>协议与功能测试</td><td>任务状态、权限、引用和断连恢复等流程是否符合约定。</td></tr><tr><td>问答样例检查</td><td>在给定语料与条件下，回答是否得到相关证据支持。</td></tr><tr><td>独立效果评测</td><td>在固定评测协议与保留数据上，比较检索及回答质量。</td></tr></tbody></table>
+        <p>语料或问题集合变化之后，原来的效果结论也需要重新核对。让证据、测试条件与结论一起保留下来，后续改进才有可以比较的起点。</p>
+      </article>
+      <nav class="article-end" aria-label="继续阅读"><a href="/notes/gateway/">← 上一篇：模型调用的计量</a><a href="/notes/analytics/">下一篇：数据问题的边界 →</a></nav>
+    </main>
+  </div>
+  <footer class="site-footer"><div class="wrap footer-inner"><div><span class="footer-brand">思构手记</span><span>　记录思考，构建系统。</span></div><div class="footer-meta"><span>© 2026 思构手记</span><a href="https://beian.miit.gov.cn/" rel="noopener noreferrer" target="_blank">粤ICP备2026161349号-1</a></div></div></footer>
+</body>
+</html>
