@@ -200,11 +200,13 @@
       "E5"
     ],
     "addressEntered": "https://linhengyi.xyz/",
-    "state": "safety responsible-person identity verification pending; emergency contact authenticated",
+    "state": "ready for final user confirmation; both responsible-person authentications passed",
     "existingIps": "preserved",
     "removedCategories": [
       "A1"
     ],
     "resubmitted": false
-  }
+  },
+  "projectName": "sigou_note",
+  "repository": "https://github.com/zjqylhy/sigou_note"
 }

@@ -2,7 +2,7 @@
 
 2026-10-28（北京时间），按已确认需求与技术方案上线。
 
-正式地址：[思构手记](https://linhengyi.xyz/)。页面来源版本为 `4f39545`，本项目源码独立维护。
+正式地址：[思构手记](https://linhengyi.xyz/)。页面来源版本为 `4f39545`，源码由独立项目 [sigou_note](https://github.com/zjqylhy/sigou_note) 维护，本地目录为 `C:\Users\LHY95\Documents\Codex\sigou_note`。
 
 ## 发布结果
 
@@ -49,4 +49,4 @@ python3 /opt/sigou-notes/releases/20261028-4f39545/deploy_site.py rollback --rel
 
 ## 备案状态
 
-原草稿的网站访问地址与分类已调整并进入负责人核对步骤。应急联络人认证成功，安全负责人认证仍待完成；正式重新提交尚未执行，详细变更见[备案信息准备](filing-preparation.md)。
+原草稿的网站访问地址与分类已调整，两处负责人认证均已成功，已到最终责任告知书页面；正式重新提交尚未执行，详细变更见[备案信息准备](filing-preparation.md)。

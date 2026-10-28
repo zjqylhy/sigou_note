@@ -1,8 +1,15 @@
-# 思构手记
+# sigou_note · 思构手记
 
 个人技术主页独立项目，正式域名为 `https://linhengyi.xyz/`。
 
-当前阶段：网站已上线，HTTPS 与浏览器验证通过；公安备案草稿待负责人身份认证与提交前确认。
+当前阶段：网站已上线，HTTPS 与浏览器验证通过；两处负责人身份认证均已完成，公安备案等待最终提交确认。
+
+## 项目维护
+
+- GitHub 仓库：[zjqylhy/sigou_note](https://github.com/zjqylhy/sigou_note)。
+- 本地目录：`C:\Users\LHY95\Documents\Codex\sigou_note`。
+- 维护分支：`main`。
+- 线上目录：服务器 `/opt/sigou-notes`，对应本文后续部署与恢复命令。
 
 - [需求规格](docs/requirements.md)
 - [技术方案](docs/technical-plan.md)
@@ -40,4 +47,4 @@ python -m http.server 4173 --bind 127.0.0.1 --directory public
 python -m unittest discover -s tests -v
 ```
 
-用户于 2026-10-28 确认：上线与“思构手记”一致的个人技术主页，展示网站介绍和真实项目说明；补齐备案访问地址、核对 IP 和网站分类，重新提交前人工确认。随后明确要求新建独立项目。
+用户于 2026-10-28 确认：上线与“思构手记”一致的个人技术主页，展示网站介绍和真实项目说明；补齐备案访问地址、核对 IP 和网站分类，重新提交前人工确认。随后明确要求新建独立项目，并指定项目名称为 `sigou_note` 及上述远程仓库。
