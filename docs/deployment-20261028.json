@@ -1,0 +1,210 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-28",
+  "timezone": "Asia/Shanghai",
+  "site": "https://linhengyi.xyz/",
+  "pageSourceCommit": "4f39545",
+  "deployment": {
+    "release": "20261028-4f39545",
+    "archive_sha256": "4a24d795702a3841c51b4fb0f23a497aaf093fa9aab2836661c165d689dd0d58",
+    "state": "activated",
+    "caddy_before_sha256": "7366441a3d8bf7d59540cb7f003f913c382891a87fc82e11599ee30c83bc130e",
+    "manage_before_sha256": "fa8a21c5b6865fe63ed4aaca1bd662e75b3379a4282222fc33165a3e517dba17",
+    "containers_before": {
+      "llm-gateway-lite-grafana-1": "8a6775df6396",
+      "llm-gateway-lite-admin-1": "0a64116309c8",
+      "llm-gateway-lite-edge-1": "70334a29083e",
+      "llm-gateway-lite-gateway-1": "c2310bc37793",
+      "llm-gateway-lite-worker-1": "524d7f0cb6af",
+      "llm-gateway-lite-prometheus-1": "b4e7bac768ce",
+      "llm-gateway-lite-redis-1": "ec6cdd1c1b90",
+      "llm-gateway-lite-mysql-1": "88eee9014355",
+      "llm-gateway-lite-kafka-1": "5bd9861627eb",
+      "llm-gateway-lite-etcd-1": "53489c3e538e"
+    },
+    "caddy_validation": "passed",
+    "non_edge_config_comparison": "identical",
+    "containers_after": {
+      "llm-gateway-lite-edge-1": "7b230b9c0ee3",
+      "llm-gateway-lite-grafana-1": "8a6775df6396",
+      "llm-gateway-lite-admin-1": "0a64116309c8",
+      "llm-gateway-lite-gateway-1": "c2310bc37793",
+      "llm-gateway-lite-worker-1": "524d7f0cb6af",
+      "llm-gateway-lite-prometheus-1": "b4e7bac768ce",
+      "llm-gateway-lite-redis-1": "ec6cdd1c1b90",
+      "llm-gateway-lite-mysql-1": "88eee9014355",
+      "llm-gateway-lite-kafka-1": "5bd9861627eb",
+      "llm-gateway-lite-etcd-1": "53489c3e538e"
+    },
+    "console_status": 200,
+    "unauthenticated_api_status": 401,
+    "non_edge_containers": "unchanged"
+  },
+  "publicVerification": {
+    "checks": 23,
+    "paid_model_calls": 0,
+    "results": [
+      {
+        "route": "/404.html",
+        "status": 200,
+        "sha256_match": true
+      },
+      {
+        "route": "/favicon.svg",
+        "status": 200,
+        "sha256_match": true
+      },
+      {
+        "route": "/",
+        "status": 200,
+        "sha256_match": true
+      },
+      {
+        "route": "/notes/analytics/",
+        "status": 200,
+        "sha256_match": true
+      },
+      {
+        "route": "/notes/gateway/",
+        "status": 200,
+        "sha256_match": true
+      },
+      {
+        "route": "/notes/retrieval/",
+        "status": 200,
+        "sha256_match": true
+      },
+      {
+        "route": "/robots.txt",
+        "status": 200,
+        "sha256_match": true
+      },
+      {
+        "route": "/sitemap.xml",
+        "status": 200,
+        "sha256_match": true
+      },
+      {
+        "route": "/styles.css",
+        "status": 200,
+        "sha256_match": true
+      },
+      {
+        "route": "/.env",
+        "status": 404,
+        "custom_error_page": true
+      },
+      {
+        "route": "/.git/config",
+        "status": 404,
+        "custom_error_page": true
+      },
+      {
+        "route": "/missing-page",
+        "status": 404,
+        "custom_error_page": true
+      },
+      {
+        "route": "/deploy/site.caddy",
+        "status": 404,
+        "custom_error_page": true
+      },
+      {
+        "hostname": "console",
+        "route": "/metrics",
+        "status": 404
+      },
+      {
+        "hostname": "console",
+        "route": "/healthz",
+        "status": 404
+      },
+      {
+        "hostname": "console",
+        "route": "/readyz",
+        "status": 404
+      },
+      {
+        "hostname": "api",
+        "route": "/metrics",
+        "status": 404
+      },
+      {
+        "hostname": "api",
+        "route": "/healthz",
+        "status": 404
+      },
+      {
+        "hostname": "api",
+        "route": "/readyz",
+        "status": 404
+      },
+      {
+        "hostname": "console",
+        "route": "/",
+        "status": 200
+      },
+      {
+        "hostname": "helpdesk-rag",
+        "route": "/",
+        "status": 200
+      },
+      {
+        "hostname": "nl2sql-agent",
+        "route": "/",
+        "status": 200
+      },
+      {
+        "hostname": "api",
+        "route": "/v1/models",
+        "status": 401
+      }
+    ]
+  },
+  "dns": [
+    {
+      "value": "47.113.231.252",
+      "type": "A",
+      "name": "linhengyi.xyz",
+      "ttl": 600
+    },
+    {
+      "value": "linhengyi.xyz",
+      "type": "CNAME",
+      "name": "www.linhengyi.xyz",
+      "ttl": 600
+    }
+  ],
+  "redirects": {
+    "destination": "https://linhengyi.xyz/",
+    "httpRoot": 308,
+    "httpsWww": 301
+  },
+  "tls": {
+    "issuer": "Lets Encrypt",
+    "notAfterUtc": "2027-01-26T09:25:46Z",
+    "systemTrustValidation": "passed",
+    "notBeforeUtc": "2026-10-28T09:25:47Z"
+  },
+  "browser": {
+    "desktop": "passed",
+    "mobileDocumentWidth": 375,
+    "mobilePages": 4,
+    "mobileMaxScrollWidth": 375,
+    "mobileViewportWidth": 390,
+    "result": "no horizontal overflow"
+  },
+  "filing": {
+    "categories": [
+      "E4",
+      "E5"
+    ],
+    "addressEntered": "https://linhengyi.xyz/",
+    "state": "responsible-person identity verification pending",
+    "existingIps": "preserved",
+    "removedCategories": [
+      "A1"
+    ],
+    "resubmitted": false
+  }
+}
