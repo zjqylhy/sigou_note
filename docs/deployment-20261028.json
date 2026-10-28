@@ -200,12 +200,19 @@
       "E5"
     ],
     "addressEntered": "https://linhengyi.xyz/",
-    "state": "ready for final user confirmation; both responsible-person authentications passed",
+    "state": "pending_review",
     "existingIps": "preserved",
     "removedCategories": [
       "A1"
     ],
-    "resubmitted": false
+    "resubmitted": true,
+    "submittedAt": "2026-10-28T19:17:17+08:00",
+    "authority": "南山区网安大队（广东省深圳市南山区）",
+    "submittedFieldsVerified": true,
+    "responsiblePersonAuthentications": "both passed",
+    "userConfirmedResponsibilityNoticeAndSubmission": true,
+    "securityAssessmentPrompt": true,
+    "securityAssessmentInitiated": false
   },
   "projectName": "sigou_note",
   "repository": "https://github.com/zjqylhy/sigou_note"
